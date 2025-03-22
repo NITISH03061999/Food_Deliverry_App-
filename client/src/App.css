@@ -1,0 +1,26 @@
+/* /* * {
+    border: 1px solid red; /* Helps visualize layout 
+  } */
+  .signup-page {
+    background: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-page {
+    background: url("https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") 
+    no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .auth-container {
+    background: rgba(255, 255, 255, 0.2); /* Light blur effect */
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
