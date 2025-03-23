@@ -146,7 +146,7 @@ const Signup = () => {
 
               <div className="d-flex justify-content-between align-items-center">
                 <Button variant="" className="custom-btn btn-secondary" type="button">
-                  <Link to="/login" className="text-white text-decoration-none">
+                  <Link to="/" className="text-white text-decoration-none">
                     Already a User?
                   </Link>
                 </Button>
