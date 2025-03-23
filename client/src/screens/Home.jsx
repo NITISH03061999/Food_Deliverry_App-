@@ -3,7 +3,6 @@ import CustomNavbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CustomCard from "../components/Card";
 import Carousel from "react-bootstrap/Carousel";
-import Button from "react-bootstrap/Button";
 
 const Home = () => {
   const [foodcat, Setfoodcat] = useState([]);
