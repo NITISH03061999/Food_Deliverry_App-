@@ -96,7 +96,7 @@ const CustomNavbar = () => {
             <Nav className="me-auto">
               <Nav.Link
                 as={Link}
-                to="/"
+                to="/home"
                 className="text-white me-4 fs-5 fw-bolder"
               >
                 Home
