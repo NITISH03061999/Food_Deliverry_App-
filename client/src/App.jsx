@@ -13,8 +13,8 @@ function App() {
     <CartProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login/>} />
+          <Route path="/home" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/myorder" element={<Myorder />} />
           

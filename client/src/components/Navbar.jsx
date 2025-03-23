@@ -41,16 +41,19 @@ const CustomNavbar = () => {
     }
 
     try {
-      const response = await fetch("https://vercel-backend-foodapp.onrender.com/api/OrderData", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          order_data: cartData,
-          email: useremail,
-          order_date: new Date().toDateString(),
-          order_time: new Date().toLocaleTimeString()
-        }),
-      });
+      const response = await fetch(
+        "https://vercel-backend-foodapp.onrender.com/api/OrderData",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            order_data: cartData,
+            email: useremail,
+            order_date: new Date().toDateString(),
+            order_time: new Date().toLocaleTimeString(),
+          }),
+        }
+      );
 
       const responseData = await response.json();
       if (response.ok) {
@@ -68,20 +71,42 @@ const CustomNavbar = () => {
 
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" className="bg-success px-3" variant="dark">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        className="bg-success px-3"
+        variant="dark"
+      >
         <Container>
-          <Navbar.Brand as={Link} to="/" className="text-white me-5 fs-1 fst-italic fw-bolder">
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            className="text-white me-5 fst-italic fw-bolder text-truncate"
+            style={{
+              fontSize: "clamp(18px, 5vw, 32px)",
+              maxWidth: "100%",
+              whiteSpace: "nowrap",
+            }}
+          >
             Dhaka's Kitchen
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as={Link} to="/" className="text-white me-4 fs-5 fw-bolder">
+              <Nav.Link
+                as={Link}
+                to="/"
+                className="text-white me-4 fs-5 fw-bolder"
+              >
                 Home
               </Nav.Link>
               {localStorage.getItem("authtoken") && (
-                <Nav.Link as={Link} to="/myorder" className="text-white fs-5 fw-bolder">
+                <Nav.Link
+                  as={Link}
+                  to="/myorder"
+                  className="text-white fs-5 fw-bolder"
+                >
                   My Orders
                 </Nav.Link>
               )}
@@ -89,21 +114,41 @@ const CustomNavbar = () => {
 
             {!localStorage.getItem("authtoken") ? (
               <Nav className="ms-auto d-flex gap-3">
-                <Nav.Link as={Link} to="/login" className="btn bg-white text-success p-2 fw-bolder">
+                <Nav.Link
+                  as={Link}
+                  to="/"
+                  className="btn bg-white text-success p-2 fw-bolder"
+                >
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/signup" className="btn bg-white text-success p-2 fw-bolder">
+                <Nav.Link
+                  as={Link}
+                  to="/signup"
+                  className="btn bg-white text-success p-2 fw-bolder"
+                >
                   Signup
                 </Nav.Link>
               </Nav>
             ) : (
               <Nav className="ms-auto d-flex gap-3">
-                <Nav.Link className="btn bg-white text-success p-2 fw-bolder" onClick={handleShowCart}>
+                <Nav.Link
+                  className="btn bg-white text-success p-2 fw-bolder"
+                  onClick={handleShowCart}
+                >
                   My Cart
-                  {cartCount > 0 && <Badge bg="danger" className="ms-2">{cartCount}</Badge>}
+                  {cartCount > 0 && (
+                    <Badge bg="danger" className="ms-2">
+                      {cartCount}
+                    </Badge>
+                  )}
                 </Nav.Link>
 
-                <Nav.Link as={Link} to="/login" className="btn bg-white text-danger p-2 fw-bolder" onClick={handleLogout}>
+                <Nav.Link
+                  as={Link}
+                  to="/"
+                  className="btn bg-white text-danger p-2 fw-bolder"
+                  onClick={handleLogout}
+                >
                   Logout
                 </Nav.Link>
               </Nav>
@@ -117,29 +162,54 @@ const CustomNavbar = () => {
         <Modal.Header closeButton>
           <Modal.Title>🛒 Your Cart</Modal.Title>
         </Modal.Header>
-        <Modal.Body style={{ maxHeight: "400px", overflowY: "auto", scrollbarWidth: "thin", msOverflowStyle: "none" }}>
+        <Modal.Body
+          style={{
+            maxHeight: "400px",
+            overflowY: "auto",
+            scrollbarWidth: "thin",
+            msOverflowStyle: "none",
+          }}
+        >
           {cartData.length === 0 ? (
             <div className="text-center fs-4">Your cart is empty!</div>
           ) : (
             <div className="container">
               <div className="row">
                 {cartData.map((item, index) => (
-                  <div key={item._id || item.id || index} className="col-md-12 mb-3">
+                  <div
+                    key={item._id || item.id || index}
+                    className="col-md-12 mb-3"
+                  >
                     <Card className="shadow-sm">
                       <div className="row g-0">
                         <div className="col-md-4">
-                          <Card.Img src={item.img} alt={item.name} className="img-fluid rounded-start" style={{ height: "160px", objectFit: "cover" }} />
+                          <Card.Img
+                            src={item.img}
+                            alt={item.name}
+                            className="img-fluid rounded-start"
+                            style={{ height: "160px", objectFit: "cover" }}
+                          />
                         </div>
                         <div className="col-md-8">
                           <Card.Body>
                             <Card.Title>{item.name}</Card.Title>
                             <Card.Text>
-                              <strong>Size:</strong> {item.size} | <strong>Qty:</strong> {item.qty}
+                              <strong>Size:</strong> {item.size} |{" "}
+                              <strong>Qty:</strong> {item.qty}
                             </Card.Text>
                             <Card.Text>
                               <strong>Price:</strong> ₹{item.price}
                             </Card.Text>
-                            <Button variant="danger" size="sm" onClick={() => dispatch({ type: "REMOVE", id: item._id || item.id })}>
+                            <Button
+                              variant="danger"
+                              size="sm"
+                              onClick={() =>
+                                dispatch({
+                                  type: "REMOVE",
+                                  id: item._id || item.id,
+                                })
+                              }
+                            >
                               Remove
                             </Button>
                           </Card.Body>
@@ -154,10 +224,15 @@ const CustomNavbar = () => {
         </Modal.Body>
         <Modal.Footer>
           <h5 className="me-auto">
-            Total: ₹{cartData.reduce((total, item) => total + (item.price || 0), 0)}
+            Total: ₹
+            {cartData.reduce((total, item) => total + (item.price || 0), 0)}
           </h5>
-          <Button variant="secondary" onClick={handleCloseCart}>Close</Button>
-          <Button variant="success" onClick={handleCheckout}>Checkout</Button>
+          <Button variant="secondary" onClick={handleCloseCart}>
+            Close
+          </Button>
+          <Button variant="success" onClick={handleCheckout}>
+            Checkout
+          </Button>
         </Modal.Footer>
       </Modal>
     </>

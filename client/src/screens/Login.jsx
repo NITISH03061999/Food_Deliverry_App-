@@ -42,7 +42,7 @@ const Login = () => {
       if (res.authToken) {
         localStorage.setItem("userEmail", credentials.email);
         localStorage.setItem("authtoken", res.authToken);
-        navigate("/");
+        navigate("/home");
         toast.success("Login Successfull!");
       } else {
         toast.error("Invalid credentials!");

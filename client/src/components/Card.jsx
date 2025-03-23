@@ -4,44 +4,37 @@ import Card from "react-bootstrap/Card";
 import { useDispatchCart, useCart } from "./Contextreducer";
 import { toast } from "react-toastify";
 
-
 const CustomCard = (props) => {
-
   let dispatch = useDispatchCart();
   let options = props.options || {};
   let priceOptions = Object.keys(options);
-  const [qty, setqty] = useState(1);
-  const [size, setsize] = useState("");
+  const [qty, setQty] = useState(1);
+  const [size, setSize] = useState(priceOptions[0] || ""); // Set default size to first option
 
-  // Dynamically calculate total price
-  const totalPrice = qty * (props.options[size] || 0);
+  // Calculate total price dynamically
+  const totalPrice = qty * (options[size] || 0);
 
-  const handleaddtocart = async () => {
-    if (!size) {
-      toast.error("Please select a size before adding to cart!");
+  const handleAddToCart = async () => {
+    if (!localStorage.getItem("authtoken")) {
+      toast.error("Please login first!");
       return;
     }
-    else if(!localStorage.getItem("authtoken")){
-      toast.success("please login first !");
-    }
-    else{
-      await dispatch({
-        type: "ADD",
-        img:props.fooditems.img,
-        id: props.fooditems._id,
-        name: props.fooditems.name,
-        price: totalPrice,
-        qty: qty,
-        size: size,
-      });
-      toast.success("This item has been added to cart.") 
-    }
 
-   
+    await dispatch({
+      type: "ADD",
+      img: props.fooditems.img,
+      id: props.fooditems._id,
+      name: props.fooditems.name,
+      price: totalPrice,
+      qty: qty,
+      size: size, // Ensures a size is always set
+    });
+
+    toast.success("This item has been added to cart.");
   };
+
   let data = useCart();
 
-  // UseEffect to check updated cart
   useEffect(() => {
     console.log("Updated Cart Data:", data);
   }, [data]);
@@ -57,21 +50,24 @@ const CustomCard = (props) => {
         <Card.Title>{props.fooditems.name || "Default Food Name"}</Card.Title>
 
         <div className="w-100 mb-2 d-flex align-items-center">
+          {/* Quantity Selector */}
           <select
             className="m-2 ms-0 p-1 bg-success text-white rounded"
-            onChange={(e) => setqty(Number(e.target.value))}
+            onChange={(e) => setQty(Number(e.target.value))}
             style={{ fontSize: "15px" }}
           >
             {Array.from({ length: 6 }, (_, i) => (
-              <option key={i + 1} value={i + 1} className="">
+              <option key={i + 1} value={i + 1}>
                 {i + 1}
               </option>
             ))}
           </select>
 
+          {/* Size Selector (Defaults to First Option) */}
           <select
             className="m-2 ms-0 p-1 bg-success text-white rounded"
-            onChange={(e) => setsize(e.target.value)}
+            value={size} // Ensure the default selection is shown
+            onChange={(e) => setSize(e.target.value)}
             style={{ fontSize: "15px" }}
           >
             {priceOptions.map((data) => (
@@ -82,11 +78,13 @@ const CustomCard = (props) => {
           </select>
         </div>
 
+        {/* Total Price Display */}
         <div className="d-inline" style={{ fontSize: "20px", fontWeight: "700" }}>
           Total Price: {totalPrice ? `₹${totalPrice}` : "Select a size"}
         </div>
 
-        <Button variant="success" className="w-100 mt-2" onClick={handleaddtocart}>
+        {/* Add to Cart Button */}
+        <Button variant="success" className="w-100 mt-2" onClick={handleAddToCart}>
           Add to Cart
         </Button>
       </Card.Body>
