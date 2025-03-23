@@ -72,7 +72,7 @@ const Signup = () => {
 
         // Redirect to login page after successful signup
         setTimeout(() => {
-          navigate("/login"); // Use navigate to redirect to login page
+          navigate("/"); // Use navigate to redirect to login page
         }, 1500); // Wait for 1.5 seconds to show the success toast before navigating
       } else {
         toast.error("Failed to create profile. Please try again.");
