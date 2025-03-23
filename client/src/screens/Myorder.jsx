@@ -17,7 +17,7 @@ const Myorder = () => {
       console.log("Fetching orders for:", email);
       toast.info("Fetching your orders...");
 
-      const res = await fetch("http://localhost:5000/api/myOrderData", {
+      const res = await fetch("https://vercel-backend-foodapp.onrender.com/api/myOrderData", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
