@@ -41,7 +41,7 @@ const CustomNavbar = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/api/OrderData", {
+      const response = await fetch("https://vercel-backend-foodapp.onrender.com/api/OrderData", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
