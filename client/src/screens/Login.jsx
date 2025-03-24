@@ -1,25 +1,26 @@
 import React, { useState } from "react";
-import { Button, Form, Container, Fade } from "react-bootstrap";
+import { Button, Form, Container, Fade, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "../App.css"
+import "../App.css";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false); // New loading state
 
   let navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors = [];
-    
+
     if (!credentials.email) newErrors.push("Email is required.");
     else if (!/\S+@\S+\.\S+/.test(credentials.email)) newErrors.push("Email is invalid.");
     if (!credentials.password) newErrors.push("Password is required.");
 
     // Show errors as toast notifications
     newErrors.forEach((error) => toast.error(error));
-    
+
     return newErrors.length === 0;
   };
 
@@ -27,6 +28,8 @@ const Login = () => {
     e.preventDefault();
 
     if (!validateForm()) return;
+
+    setLoading(true); // Start loading
 
     try {
       const response = await fetch("https://vercel-backend-foodapp.onrender.com/api/loginuser", {
@@ -42,14 +45,16 @@ const Login = () => {
       if (res.authToken) {
         localStorage.setItem("userEmail", credentials.email);
         localStorage.setItem("authtoken", res.authToken);
+        toast.success("Login Successful!");
         navigate("/home");
-        toast.success("Login Successfull!");
       } else {
         toast.error("Invalid credentials!");
       }
     } catch (error) {
       console.error("Error:", error);
       toast.error("Something went wrong!");
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -96,8 +101,8 @@ const Login = () => {
                   </Link>
                 </Button>
 
-                <Button type="submit" className="custom-btn btn-secondary text-white fw-bolder">
-                  Login
+                <Button type="submit" className="custom-btn btn-secondary text-white fw-bolder" disabled={loading}>
+                  {loading ? <Spinner animation="border" size="sm" /> : "Login"}
                 </Button>
               </div>
 

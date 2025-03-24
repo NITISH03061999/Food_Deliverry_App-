@@ -104,7 +104,7 @@ const Signup = () => {
                   name="name"
                   value={credentials.name}
                   onChange={handleChange}
-                  className="form-control-lg fw-bolder"
+                  className="form-control-lg "
                 />
               </Form.Group>
 
@@ -116,7 +116,7 @@ const Signup = () => {
                   name="email"
                   value={credentials.email}
                   onChange={handleChange}
-                  className="form-control-lg fw-bolder"
+                  className="form-control-lg"
                 />
               </Form.Group>
 
@@ -128,7 +128,7 @@ const Signup = () => {
                   name="password"
                   value={credentials.password}
                   onChange={handleChange}
-                  className="form-control-lg fw-bolder"
+                  className="form-control-lg "
                 />
               </Form.Group>
 
@@ -140,7 +140,7 @@ const Signup = () => {
                   name="geolocation"
                   value={credentials.geolocation}
                   onChange={handleChange}
-                  className="form-control-lg fw-bolder"
+                  className="form-control-lg"
                 />
               </Form.Group>
 
@@ -163,7 +163,7 @@ const Signup = () => {
               </div>
 
               <Fade in={show} timeout={300}>
-                <p className="text-muted mt-3 text-center">Join the Best Food Community! 🍕🍔</p>
+                <p className=" mt-3 text-center">Join the Best Food Community! 🍕🍔</p>
               </Fade>
             </Form>
           </div>

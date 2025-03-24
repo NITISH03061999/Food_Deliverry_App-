@@ -10,7 +10,7 @@ export default function Footer() {
         <svg className="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
       </a>
 
-      <span className="text-muted">© 2025 GoFood, Inc</span>
+      <span className="text-muted">© 2025 Dhaka's Kitchen, Inc</span>
       </div>
       <div><span className='text-muted'>Rights Under * Nitish Dhaka *</span></div>
       
