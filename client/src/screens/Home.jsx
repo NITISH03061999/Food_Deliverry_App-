@@ -105,9 +105,9 @@ const Home = () => {
           foodcat.map((item) => (
             <div
               key={item._id || item.id || Math.random()}
-              className="row fs-3 mb-3 "
-            >
-              {item.CategoryName}
+              className="row fs-3 mb-3"
+            ><p className="ms-2">   {item.CategoryName}</p>
+           
               <hr />
               {fooditem.length > 0 ? (
                 fooditem

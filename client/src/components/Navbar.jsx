@@ -80,7 +80,7 @@ const CustomNavbar = () => {
         <Container>
           <Navbar.Brand
             as={Link}
-            to="/"
+            to="/home"
             className="text-white me-5 fst-italic fw-bolder text-truncate"
             style={{
               fontSize: "clamp(18px, 5vw, 32px)",
